@@ -16,12 +16,12 @@ docker run --gpus all --shm-size 10.24gb -it -p 8888:8888 --rm -v $(pwd):/skywal
 
 
 ## Testing the data generator on a single case
-python3 src/1_generate_cases.py\n
-cd cases/case_0_0
-. $WM_PROJECT_DIR/bin/tools/RunFunctions
-runApplication blockMesh
-runApplication snappyHexMesh -overwrite
-runApplication simpleFoam
+python3 src/1_generate_cases.py  
+cd cases/case_0_0  
+. $WM_PROJECT_DIR/bin/tools/RunFunctions  
+runApplication blockMesh  
+runApplication snappyHexMesh -overwrite  
+runApplication simpleFoam  
 
 ## TODO:
 - Add pyproject.toml file and modify the docker file
