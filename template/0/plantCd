@@ -1,0 +1,44 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2012                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      plantCd; 		//TOH: forrestTerrain tutorial had just Cd
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 0 0 0 0 0 0];
+
+internalField   uniform 0.0;
+
+boundaryField
+{
+    #includeEtc "caseDicts/setConstraintTypes"
+
+
+    "(ground|terrain)"
+    {
+        type            zeroGradient;
+    }
+    "proc.*"
+    {
+    type            processor;
+    }
+    "(inlet|surroundings|building_1|building_2|skywalk|top|sides|outlet)"
+    {
+        type            fixedValue;
+        value           uniform 0;
+    }
+
+    
+}
+
+
+// ************************************************************************* //

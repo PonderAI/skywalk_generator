@@ -1,0 +1,1 @@
+# Code to clean and process the images into model training data

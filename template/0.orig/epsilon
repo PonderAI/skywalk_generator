@@ -1,0 +1,69 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+
+ArchiWind by NablaFlow
+
+Initial setup developed for OpenFOAM v2112 by TOH
+
+Todo: 
+
+\*---------------------------------------------------------------------------*/
+
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    location    "0";
+    object      epsilon;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 2 -3 0 0 0 0];
+
+#include        "include/initialConditions"
+
+#include        "include/ABLConditions"
+
+
+internalField   uniform $turbulentEpsilon;
+
+boundaryField
+{
+    top
+    {
+        type            slip;
+    }
+    
+    terrain
+    {
+        type            atmEpsilonWallFunction;
+        value           uniform $turbulentEpsilon;
+        z0              $z0;
+    }
+    
+    sides
+    {
+        type            freestream;
+        freestreamBC
+        {
+           type         atmBoundaryLayerInletEpsilon;
+           #include     "include/ABLConditions"
+        }
+        value           $internalField;
+    }
+    
+    "(surroundings|building)"
+    {
+        type            epsilonWallFunction;
+        value           $internalField;
+    }
+    
+    "proc.*"
+    {
+    type            processor;
+    }
+    
+}
+
+
+// ************************************************************************* //

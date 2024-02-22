@@ -1,0 +1,123 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.2.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.2;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+
+
+
+
+convertToMeters 1.0;
+
+
+ // Diameter 560
+ // Height
+ //Width of middle square section 360
+ // Number of cells in the square section
+ // Number of cells from square section to perimeter
+ // Number of cells from top to bottom
+ // Grading of cylinder part
+ // Grading of height
+
+
+
+
+vertices
+(
+ ( 150 -150 0.0) // Vertex sesqb = 0 
+ (-150 -150 0.0) // Vertex swsqb = 1 
+ (-150  150 0.0) // Vertex nwsqb = 2 
+ ( 150  150 0.0) // Vertex nesqb = 3 
+
+
+ ( 176.77669529663 -176.77669529663 0.0) // Vertex secb = 4 
+ (-176.77669529663 -176.77669529663 0.0) // Vertex swcb = 5 
+ (-176.77669529663  176.77669529663 0.0) // Vertex nwcb = 6 
+ ( 176.77669529663  176.77669529663 0.0) // Vertex necb = 7 
+
+ ( 150 -150 300) // Vertex sesqt = 8 
+ (-150 -150 300) // Vertex swsqt = 9 
+ (-150  150 300) // Vertex nwsqt = 10 
+ ( 150  150 300) // Vertex nesqt = 11 
+
+ ( 176.77669529663 -176.77669529663 300) // Vertex sect = 12 
+ (-176.77669529663 -176.77669529663 300) // Vertex swct = 13 
+ (-176.77669529663  176.77669529663 300) // Vertex nwct = 14 
+ ( 176.77669529663  176.77669529663 300) // Vertex nect = 15 
+);				
+
+blocks
+(
+ hex ( 1 0 3 2 9 8 11 10) (80 80 40) simpleGrading (1 1 15)
+ hex ( 5 4 0 1 13 12 8 9) (80 25 40) simpleGrading (1 0.2 15)
+ hex ( 1 2 6 5 9 10 14 13) (80 25 40) simpleGrading (1 5 15)
+ hex ( 2 3 7 6 10 11 15 14) (80 25 40) simpleGrading (1 5 15)
+ hex ( 3 0 4 7 11 8 12 15) (80 25 40) simpleGrading (1 5 15)
+);
+
+edges
+(
+ arc 4 5 (0.0 -250 0.0)
+ arc 5 6 (-250 0.0 0.0)
+ arc 6 7 (0.0 250 0.0)
+ arc 7 4 (250 0.0 0.0)
+
+ arc 0 1 (0.0 -200 0.0)
+ arc 1 2 (-200 0.0 0.0)
+ arc 2 3 (0.0 200 0.0)
+ arc 3 0 (200 0.0 0.0)
+
+ arc 12 13 (0.0 -250 300)
+ arc 13 14 (-250 0.0 300)
+ arc 14 15 (0.0 250 300)
+ arc 15 12 (250 0.0 300)
+
+ arc 8 9 (0.0 -200 300)
+ arc 9 10 (-200 0.0 300)
+ arc 10 11 (0.0 200 300)
+ arc 11 8 (200 0.0 300)
+
+
+);
+
+patches
+(
+ wall terrain
+ (
+  (0 3 2 1)
+  (0 4 7 3)
+  (4 0 1 5)
+  (1 2 6 5)
+  (3 7 6 2)
+ )
+
+ patch top
+ (
+  (8 11 10 9)
+  (8 12 15 11)
+  (12 8 9 13)
+  (9 10 14 13)
+  (11 15 14 10)
+ )
+
+ patch sides
+ (
+  (5 4 12 13)
+  (5 13 14 6)
+  (6 14 15 7)
+  (7 15 12 4)
+ )
+
+);

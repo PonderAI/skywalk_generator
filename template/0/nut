@@ -1,0 +1,65 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+
+ArchiWind by NablaFlow
+
+Initial setup developed for OpenFOAM v2112 by TOH
+
+Todo: 
+
+\*---------------------------------------------------------------------------*/
+
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    location    "0";
+    object      nut;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 2 -1 0 0 0 0];
+
+
+internalField   uniform 0;
+
+#include "include/ABLConditions"
+
+
+boundaryField
+{
+ 
+    top
+    {
+        type            calculated;
+        value           uniform 0;
+    }
+    
+    terrain
+    {
+        type            atmNutkWallFunction;
+        blending        stepwise;
+        z0              $z0;
+        value           $z0;
+    }
+    
+    sides
+    {
+         type           calculated;
+         value          uniform 0;
+    }
+    
+    "(surroundings|building_1|building_2|skywalk)"
+    {
+	type 		 nutkWallFunction;
+        value           uniform 0;
+    }
+    
+    "proc.*"
+    {
+    type            processor;
+    }
+}
+
+
+// ************************************************************************* //

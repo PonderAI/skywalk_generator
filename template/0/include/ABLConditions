@@ -1,0 +1,7 @@
+
+zDir        (0 0 1);      
+Uref        5.0;
+Zref        10;           
+z0          uniform 0.03;
+d           uniform 0.0;
+flowDir     (1 0 0);

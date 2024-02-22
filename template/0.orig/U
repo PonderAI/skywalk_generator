@@ -1,0 +1,85 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+
+ArchiWind by NablaFlow
+
+Initial setup developed for OpenFOAM v2112 by TOH
+
+Todo:
+TOH: Use a constant shear stress instead of slip at top boundary. Will have to use variables. 
+ 
+\*---------------------------------------------------------------------------*/
+
+
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volVectorField;
+    location    "0";
+    object      U;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 1 -1 0 0 0 0];
+
+#include        "include/initialConditions"
+
+internalField   uniform $flowVelocity;
+
+boundaryField
+{
+    top
+    {
+        type            slip;
+    }
+        
+    /*
+    top
+    {
+    //  (HW:p. 365):
+    //  "In addition, as suggested by RH and often ignored by others, a"
+    //  "constant shear stress of rho*(u^*)^2 was applied at the top boundary."
+    //
+    //  u^* ~ Uref*kappa/ln((Zref+z0)/z0)
+    //  (HW:Table 1):
+    //  Uref = 10 m/s
+    //  Zref = 6 m
+    //  z0 = 0.01 m
+    //  tau = rho*(u^*)^2 = 0.390796574
+        type            fixedShearStress;
+        tau             (0.390796574 0 0);
+        value           uniform (0 0 0);
+    }
+    */
+    
+    
+    terrain
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);
+    }
+    
+    sides
+    {
+        type            freestream;
+        freestreamBC
+        {
+           type         atmBoundaryLayerInletVelocity;
+           #include     "include/ABLConditions"
+        }
+        value           $internalField;
+    }
+    
+    "(surroundings|building)"
+    {
+        type            noSlip;
+    }
+    
+    "proc.*"
+    {
+    type            processor;
+    }
+}
+
+
+// ************************************************************************* //

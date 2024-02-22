@@ -1,0 +1,194 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.2.0                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.2;
+    format      ascii;
+    class       dictionary;
+    object      blockMeshDict;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+
+
+
+
+convertToMeters 1.0;
+
+
+ // Diameter 560
+ // Height
+ //Width of middle square section 360
+ // Number of cells in the square section
+ // Number of cells from square section to perimeter
+ // Number of cells from top to bottom
+ // Grading of cylinder part
+ // Grading of height
+
+
+
+
+
+
+
+
+
+vertices
+(
+ ( 500 -500 0.0) // Vertex sesqb = 0 
+ (-500 -500 0.0) // Vertex swsqb = 1 
+ (-500  500 0.0) // Vertex nwsqb = 2 
+ ( 500  500 0.0) // Vertex nesqb = 3 
+
+ ( 1060.66017273171 -1060.66017082793 0.0) // Vertex secb = 4 
+ (-1060.66017273171 -1060.66017082793 0.0) // Vertex swcb = 5 
+ (-1060.66017273171  1060.66017082793 0.0) // Vertex nwcb = 6 
+ ( 1060.66017273171  1060.66017082793 0.0) // Vertex necb = 7 
+
+ ( 500 -500 300) // Vertex sesqt = 8 
+ (-500 -500 300) // Vertex swsqt = 9 
+ (-500  500 300) // Vertex nwsqt = 10 
+ ( 500  500 300) // Vertex nesqt = 11 
+
+ ( 1060.66017273171 -1060.66017082793 300) // Vertex sect = 12 
+ (-1060.66017273171 -1060.66017082793 300) // Vertex swct = 13 
+ (-1060.66017273171  1060.66017082793 300) // Vertex nwct = 14 
+ ( 1060.66017273171  1060.66017082793 300) // Vertex nect = 15 
+
+
+ // ---------------- Buildings---------------
+ // Building 1
+ (-10 -30 0.0) // Vertex building 1 seb = 16 
+ (-40 -30 0.0) // Vertex building 1 swb = 17  
+ (-40  0  0.0) // Vertex building 1 nwb = 18  
+ (-10  0  0.0) // Vertex building 1 neb = 19
+
+ (-10 -30 100) // Vertex building 1 set = 20 
+ (-40 -30 100) // Vertex building 1 swt = 21  
+ (-40  0  100) // Vertex building 1 nwt = 22  
+ (-10  0  100) // Vertex building 1 net = 23  
+
+ // Building 2
+ ( 30 -20 0.0) // Vertex building 2 seb = 24 
+ ( 10 -20 0.0) // Vertex building 2 swb = 25  
+ ( 10  0  0.0) // Vertex building 2 nwb = 26  
+ ( 30  0  0.0) // Vertex building 2 neb = 27
+
+ ( 30 -20 50) // Vertex building 2 set = 28 
+ ( 10 -20 50) // Vertex building 2 swt = 29  
+ ( 10  0  50) // Vertex building 2 nwt = 30  
+ ( 30  0  50) // Vertex building 2 net = 31 
+
+ // Skywalk
+ ( 10 -5 15) // Vertex skywalk seb = 32 
+ (-10 -5 15) // Vertex skywalk swb = 33  
+ (-10  0 15) // Vertex skywalk nwb = 34  
+ ( 10  0 15) // Vertex skywalk neb = 35
+
+ ( 10 -5 20) // Vertex skywalk set = 36 
+ (-10 -5 20) // Vertex skywalk swt = 37  
+ (-10  0 20) // Vertex skywalk nwt = 38  
+ ( 10  0 20) // Vertex skywalk net = 39   
+
+
+);				
+
+blocks
+(
+ hex ( 1 0 3 2 9 8 11 10) (80 80 40) simpleGrading (1 1 15)
+ hex ( 5 4 0 1 13 12 8 9) (80 25 40) simpleGrading (1 0.2 15)
+ hex ( 1 2 6 5 9 10 14 13) (80 25 40) simpleGrading (1 5 15)
+ hex ( 2 3 7 6 10 11 15 14) (80 25 40) simpleGrading (1 5 15)
+ hex ( 3 0 4 7 11 8 12 15) (80 25 40) simpleGrading (1 5 15)
+
+ // ---------------- Buildings----------------
+ hex ( 17 16 19 18 21 20 23 22) (80 80 40) simpleGrading (1 1 1)
+ hex ( 25 24 27 26 29 28 31 30) (80 25 40) simpleGrading (1 1 1)
+ hex ( 33 32 35 34 37 36 39 38) (80 80 40) simpleGrading (1 1 1)
+
+
+);
+
+edges
+(
+ arc 4 5 (0.0 -1500 0.0)
+ arc 5 6 (-1500 0.0 0.0)
+ arc 6 7 (0.0 1500 0.0)
+ arc 7 4 (1500 0.0 0.0)
+
+ arc 0 1 (0.0 -575 0.0)
+ arc 1 2 (-575 0.0 0.0)
+ arc 2 3 (0.0 575 0.0)
+ arc 3 0 (575 0.0 0.0)
+
+ arc 12 13 (0.0 -1500 300)
+ arc 13 14 (-1500 0.0 300)
+ arc 14 15 (0.0 1500 300)
+ arc 15 12 (1500 0.0 300)
+
+ arc 8 9 (0.0 -575 300)
+ arc 9 10 (-575 0.0 300)
+ arc 10 11 (0.0 575 300)
+ arc 11 8 (575 0.0 300)
+
+
+);
+
+patches
+(
+ wall terrain
+ (
+  (0 3 2 1)
+  (0 4 7 3)
+  (4 0 1 5)
+  (1 2 6 5)
+  (3 7 6 2)
+ )
+
+ patch top
+ (
+  (8 11 10 9)
+  (8 12 15 11)
+  (12 8 9 13)
+  (9 10 14 13)
+  (11 15 14 10)
+ )
+
+ patch sides
+ (
+  (5 4 12 13)
+  (5 13 14 6)
+  (6 14 15 7)
+  (7 15 12 4)
+ )
+
+ wall building // right hand rule, all pointing into centre of building?
+ (
+ (16 19 18 17) // building 1 b
+ (20 21 22 23) // building 1 t
+ (19 23 22 18) // building 1 n
+ (16 20 23 19) // building 1 e
+ (17 21 20 16) // building 1 s
+ (18 22 21 17) // building 1 w
+ (24 27 26 25) // building 2 b
+ (28 29 30 31) // building 2 t
+ (27 31 30 26) // building 2 n
+ (24 28 31 27) // building 2 e
+ (25 29 28 24) // building 2 s
+ (26 30 29 25) // building 2 w
+ (32 35 34 33) // skywalk b
+ (36 37 38 39) // skywalk t
+ (35 39 38 34) // skywalk n
+ (32 36 39 35) // skywalk e
+ (33 37 36 32) // skywalk s
+ (34 38 37 33) // skywalk w
+ )
+
+
+);

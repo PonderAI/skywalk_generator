@@ -1,0 +1,82 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  5                                     |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+libs ("libatmosphericModels.so" );
+application     simpleFoam;
+
+startFrom       latestTime;
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         1000;
+
+deltaT          1;
+
+writeControl    timeStep;
+
+writeInterval   200;
+
+purgeWrite      1;
+
+writeFormat     binary;
+
+writePrecision  6;
+
+writeCompression no;
+
+timeFormat      general;
+
+timePrecision   6;
+
+runTimeModifiable yes;
+
+
+/* functions */
+/* { */
+/*         processorField */
+/*     { */
+/*         type                processorField; */
+/*         libs                ("libfieldFunctionObjects.so"); */
+/*     } */
+/*     leakFind */
+/*     { */
+/*         type                sets; */
+
+/*         interpolationScheme cell; */
+/*         setFormat           vtk; */
+
+/*         sets */
+/*         ( */
+/*             leakFind */
+/*             { */
+/*                 type            shortestPath; */
+/*                 insidePoints    ((220 130 80)); */
+/*                 outsidePoints   ( */
+/*                                  (159 189 65) */
+/*                                  (236 153 65) */
+/*                                  (289 157 65) */
+/*                                 ); */
+/*                 axis            xyz; */
+/*             } */
+/*         ); */
+
+/*         // Colour the leak path by the processor ID */
+/*         fields              (processorID); */
+/*     } */
+/* } */
+// ************************************************************************* //
