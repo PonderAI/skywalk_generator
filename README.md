@@ -30,6 +30,13 @@ runApplication snappyHexMesh -overwrite
 runApplication simpleFoam
 ```  
 
+## Running the pipline
+```
+python3 src/1_generate_cases.py
+python3 src/2_run_cases.py
+xvfb-run -a --server-args='-screen 0 1024x768x24' python3 src/3_postprocess_cfd_data.py
+```
+
 ## TODO:
 - Add pyproject.toml file and modify the docker file
 - Add CLI arguments for testing and number of cases limit to generate_cases.py

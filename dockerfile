@@ -8,10 +8,14 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && \
     apt-get install -y \
         curl \
-        python3 \
+        python3.9 \
         python3-pip \
         vim \
-        nano \
+        nano \ 
+        ffmpeg \
+        libsm6 \
+        libxext6 \
+        xvfb \
         && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
@@ -33,8 +37,15 @@ RUN echo "source $WM_PROJECT_DIR/etc/bashrc" >> /root/.bashrc
 ENV PYTHONUNBUFFERED 1
 ENV PYTHONIOENCODING utf-8
 
+# Set environment variables to enable use of pyvista
+ENV DISPLAY :99.0
+ENV VTKI_OFF_SCREEN True
+
 # Set working directory
 WORKDIR /skywalk_generator
 
 # Install dependencies
-RUN pip3 install tomli numpy
+RUN pip3 install tomli numpy pyvista
+
+# Creates a virtual display server to enable use of pyvista.
+CMD Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
