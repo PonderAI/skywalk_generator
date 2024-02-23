@@ -33,5 +33,5 @@ runApplication simpleFoam
 ## TODO:
 - Add pyproject.toml file and modify the docker file
 - Add CLI arguments for testing and number of cases limit to generate_cases.py
-- write python/bash file to run the cases with OpenFOAM
+- ~~write python/bash file to run the cases with OpenFOAM~~
 - write scripts to post process the data
