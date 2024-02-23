@@ -35,6 +35,14 @@ runApplication simpleFoam
 python3 src/1_generate_cases.py
 python3 src/2_run_cases.py
 xvfb-run -a --server-args='-screen 0 1024x768x24' python3 src/3_postprocess_cfd_data.py
+
+
+## or ##
+
+bash run.sh
+python3 src/1_generate_cases.py
+python3 src/2_run_cases.py
+python3 src/3_postprocess_cfd_data.py
 ```
 
 ## TODO:

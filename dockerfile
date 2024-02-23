@@ -46,6 +46,3 @@ WORKDIR /skywalk_generator
 
 # Install dependencies
 RUN pip3 install tomli numpy pyvista
-
-# Creates a virtual display server to enable use of pyvista.
-CMD Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
