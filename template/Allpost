@@ -5,3 +5,4 @@ cd ${0%/*} || exit 1    # Run from this directory
 . $WM_PROJECT_DIR/bin/tools/RunFunctions
 
 postProcess -latestTime -func surfacesVelocity
+surfaceMeshExtract -patches '(building_1 building_2 skywalk)' constant/triSurface/buildings.stl
