@@ -6,9 +6,6 @@ import pyvista as pv
 from PIL import Image
 from matplotlib.colors import ListedColormap
 
-import debugpy
-debugpy.listen(("0.0.0.0", 5678))
-
 def save_field(output_path, mesh, field, clim, geom=False, negative=False):
 
     scale = 650
