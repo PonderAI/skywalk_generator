@@ -44,23 +44,22 @@ python3 src/3_postprocess_cfd_data.py
 
 ## Running the pipline
 ```
-python3 src/1_generate_cases.py
-python3 src/2_run_cases.py
-xvfb-run -a --server-args='-screen 0 1024x768x24' python3 src/3_postprocess_cfd_data.py
-
-
-## or ##
-
 bash run.sh
 python3 src/1_generate_cases.py
 python3 src/2_run_cases.py
 python3 src/3_postprocess_cfd_data.py
+
+## or ##
+
+python3 src/1_generate_cases.py
+python3 src/2_run_cases.py
+xvfb-run -a --server-args='-screen 0 1024x768x24' python3 src/3_postprocess_cfd_data.py
 ```
 
 ## TODO:
 - Add pyproject.toml file and modify the docker file
 - Add CLI arguments for testing and number of cases limit to generate_cases.py
-- How to save top down snapshot of geometry? Distance from plane at z=100m to the ground/bottom of skywalk
 - Perhaps the image could be conditioned with a single number representing the elevation of the skywalk?
+- ~~How to save top down snapshot of geometry? Distance from plane at z=100m to the ground/bottom of skywalk~~
 - ~~Write python/bash file to run the cases with OpenFOAM~~
 - ~~Write scripts to post process the data~~
