@@ -13,6 +13,9 @@ def replicate_template_directory(template_path: Path, case_path: Path) -> None:
 def populate_verticies(b1z1, b1x, b1y1, b1z2, b1y2,
                        b2z1, b2x, b2y1, b2z2, b2y2, 
                        swz1, swx, swy, swz2, template) -> str:
+    
+    if b1y2 >= b2y1 or b2y2 >= b1y1:
+        return False
 
     building_verticies = template.substitute(b1x0=-0.5*swx-b1x, 
                                              b1x1=-0.5*swx, 
@@ -84,11 +87,13 @@ def main() -> None:
     # Create case file for each combination
     for i, dimension_combination in enumerate(product(*dimensions)):
         building_verticies = populate_verticies(*dimension_combination, building_template)
+        if not building_verticies:
+            continue
         for inflow_deg in np.arange(0, 360, config["inflow_increment"]):
             replicate_template_directory(template_path, case_path/f"case_{i}_{inflow_deg}")
             write_snappy_hex_mesh_dict(beginning, ending, building_verticies, case_path/f"case_{i}_{inflow_deg}/system")
             write_boundary_conditions(inflow_deg, abl_template, initial_template, case_path/f"case_{i}_{inflow_deg}/0/include")
             break
-        break
+
 if __name__ == "__main__":
     main()
