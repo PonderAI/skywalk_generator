@@ -6,7 +6,7 @@ import subprocess
 def main():
     path = Path("cases")
     cases = os.listdir(path)
-    cpus = os.cpu_count()
+    # cpus = os.cpu_count()
 
     for case in cases:
         subprocess.run([path/case/"Allrun"])

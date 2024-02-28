@@ -53,10 +53,10 @@ building_2_x = [20] # width of building 1
 building_2_y = [20] # length of building 1
 # building_2_distance_from_datum = [1,1,1]
 
-skywalk_z1 = [5] # height of skywalk
+skywalk_z1 = [3] # height of skywalk
 skywalk_x = [20] # width of skywalk
-skywalk_y = [5] # length of skywalk 1
-skywalk_z2 = [15] # vertical height from gound to base of skywalk
+skywalk_y = [3] # length of skywalk 1
+skywalk_z2 = [6] # vertical height from gound to base of skywalk
 # skywalk_distance_from_datum = [1,1,1]
 
 
