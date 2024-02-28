@@ -10,20 +10,26 @@ from numpy.typing import NDArray
 def replicate_template_directory(template_path: Path, case_path: Path) -> None:
     shutil.copytree(template_path, case_path, dirs_exist_ok=True)
 
-def populate_verticies(b1z, b1x, b1y, b2z, b2x, b2y, 
-                           swz1, swx, swy, swz2, template) -> str:
+def populate_verticies(b1z1, b1x, b1y1, b1z2, b1y2,
+                       b2z1, b2x, b2y1, b2z2, b2y2, 
+                       swz1, swx, swy, swz2, template) -> str:
 
     building_verticies = template.substitute(b1x0=-0.5*swx-b1x, 
                                              b1x1=-0.5*swx, 
-                                             b1y0=-b1y, 
-                                             b1z1=b1z,
+                                             b1y0=-b1y1-b1y2, 
+                                             b1y1=-b1y2, 
+                                             b1z0=b1z2,
+                                             b1z1=b1z1-b1z2,
                                              b2x0=0.5*swx, 
                                              b2x1=0.5*swx+b2x, 
-                                             b2y0=-b2y, 
-                                             b2z1=b2z,
+                                             b2y0=-b2y1-b2y2, 
+                                             b2y1=-b2y2, 
+                                             b2z0=b2z2,
+                                             b2z1=b2z1-b2z2,
                                              swx0=-0.5*swx, 
                                              swx1=0.5*swx, 
-                                             swy0=-swy,
+                                             swy0=-swy - max(b1y2, b2y2),
+                                             swy1=-max(b1y2, b2y2),
                                              swz0=swz2,
                                              swz1=swz1+swz2,)
     
@@ -82,6 +88,7 @@ def main() -> None:
             replicate_template_directory(template_path, case_path/f"case_{i}_{inflow_deg}")
             write_snappy_hex_mesh_dict(beginning, ending, building_verticies, case_path/f"case_{i}_{inflow_deg}/system")
             write_boundary_conditions(inflow_deg, abl_template, initial_template, case_path/f"case_{i}_{inflow_deg}/0/include")
-
+            break
+        break
 if __name__ == "__main__":
     main()
