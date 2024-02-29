@@ -111,7 +111,6 @@ def main(samples: Annotated[int, typer.Argument()] = None) -> None:
         
         logging.info(f"{i} samples generated, {samples - i} samples with impossible combinations of dimensions skipped")
 
-    
     else:
         dimensions = [value for value in config["dimensions"].values()]
         i = 0
