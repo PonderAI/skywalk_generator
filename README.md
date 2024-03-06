@@ -32,7 +32,7 @@ debugpy.listen(("0.0.0.0", 5678))
 ## Running the pipline
 ```
 bash run.sh
-python3 src/1_generate_cases.py [SAMPLES: int > 0. default=None]
+python3 src/1_generate_cases.py [SAMPLES: optional int > 0. default=None]
 python3 src/2_run_cases.py
 python3 src/3_postprocess_cfd_data.py
 ```

@@ -91,7 +91,7 @@ def main(samples: Annotated[int, typer.Argument()] = None) -> None:
     # Latin hypercube sampling
     if samples is not None:
         dimension_levels = np.array([len(levels) - 1 for levels in config["dimensions"].values()])
-        if samples >= np.prod(dimension_levels + 1):
+        if samples > np.prod(dimension_levels + 1):
             logging.error(f"Cannot create more than {np.prod(dimension_levels + 1):,} samples with this combination of dimension levels")
             return
         lhs_samples = lhs(n=len(config["dimensions"]), samples=samples)
