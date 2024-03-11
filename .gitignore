@@ -1,2 +1,4 @@
 cases/
 scratch.ipynb
+generate_case_dirs.sh
+openfoam_skywalk.tar

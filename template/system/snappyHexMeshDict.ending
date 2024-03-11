@@ -126,8 +126,9 @@ castellatedMeshControls
 	    mode        distance;
 	    levels
 	    (
-		(15 3) // within first 1.0 m refinement level 4
-                (20 2) // within first 1.0 m refinement level 4
+		 ( 1 5)
+         (15 3) // within first 1.0 m refinement level 4
+         (20 2) // within first 1.0 m refinement level 4
 	    );
 	}
  
