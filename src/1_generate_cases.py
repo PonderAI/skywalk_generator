@@ -9,6 +9,7 @@ import numpy as np
 from numpy.typing import NDArray
 from pyDOE import lhs
 import typer
+from functools import cache
 
 logging.basicConfig(level=logging.INFO,
                     format="%(levelname)s %(message)s",)
@@ -63,6 +64,7 @@ def write_boundary_conditions(deg: int, abl_template, initial_template, path: Pa
     with open(path/"initialConditions", "w") as f:
         f.write(init)
 
+@cache
 def unit_vec(deg: int) -> NDArray:
     """
     Returns unit vector pointing in direction from given degrees.
