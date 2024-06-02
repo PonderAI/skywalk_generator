@@ -74,6 +74,17 @@ surfacesVelocity
             }
             interpolate     true;
         }
+        geom_slice
+        {
+            type            cuttingPlane;
+            planeType       pointAndNormal;
+            pointAndNormalDict
+            {
+                point   (0 0 7.5);
+                normal  (0 0 1);
+            }
+            interpolate     true;
+        }
     }
 }
 
