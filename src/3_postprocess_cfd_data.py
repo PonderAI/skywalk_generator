@@ -14,9 +14,12 @@ def save_field(output_path, mesh, field, clim, geom=False, negative=False):
     if geom:
         vals = np.ones((256, 3)) * (np.linspace(0, 1, 256)).reshape(256, 1)
         cmap = ListedColormap(vals)
-        plane = pv.Plane(i_size=1.5e3, j_size=1.5e3)
-        # p.add_mesh(plane, opacity=1)
-        # Adding the plane means that we cannot see the building heights from below. Might have issues with scaling again. Will have to figure out how to overcome this.
+        if negative:
+            plane = pv.Plane(center=[0,0,clim[1]] ,i_size=1.5e3, j_size=1.5e3)
+        else:
+            plane = pv.Plane(center=[0,0,clim[0]] ,i_size=1.5e3, j_size=1.5e3)
+        p.add_mesh(plane, color="black")
+        
 
     else:
         vals = np.ones((256, 3))
