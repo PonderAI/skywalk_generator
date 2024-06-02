@@ -39,7 +39,7 @@ python3 src/3_postprocess_cfd_data.py
 
 ## TODO:
 - Add pyproject.toml file and modify the docker file
-- Remove uneccassary files from the template directory
+- ~~Remove uneccassary files from the template directory~~
 - ~~Change the grading in the y-direction of the skywalk~~
 - ~~Add CLI arguments for testing and number of cases limit to generate_cases.py~~
 - ~~Perhaps the image could be conditioned with a single number representing the elevation of the skywalk?~~

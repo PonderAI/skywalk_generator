@@ -9,7 +9,7 @@ import numpy as np
 from numpy.typing import NDArray
 from pyDOE import lhs
 import typer
-from functools import cache
+# from functools import cache
 
 logging.basicConfig(level=logging.INFO,
                     format="%(levelname)s %(message)s",)
@@ -30,13 +30,13 @@ def populate_verticies(b1z1, b1x, b1y1, b1z2, b1y2,
                                              b1y0=-b1y1-b1y2, 
                                              b1y1=-b1y2, 
                                              b1z0=b1z2,
-                                             b1z1=b1z1-b1z2,
+                                             b1z1=b1z1,
                                              b2x0=0.5*swx, 
                                              b2x1=0.5*swx+b2x, 
                                              b2y0=-b2y1-b2y2, 
                                              b2y1=-b2y2, 
                                              b2z0=b2z2,
-                                             b2z1=b2z1-b2z2,
+                                             b2z1=b2z1,
                                              swx0=-0.5*swx, 
                                              swx1=0.5*swx, 
                                              swy0=-swy - max(b1y2, b2y2),
@@ -64,7 +64,7 @@ def write_boundary_conditions(deg: int, abl_template, initial_template, path: Pa
     with open(path/"initialConditions", "w") as f:
         f.write(init)
 
-@cache
+# @cache
 def unit_vec(deg: int) -> NDArray:
     """
     Returns unit vector pointing in direction from given degrees.
@@ -99,9 +99,13 @@ def main(samples: Annotated[int, typer.Argument()] = None) -> None:
         lhs_samples = lhs(n=len(config["dimensions"]), samples=samples)
 
         i = 0 # Not using enumerate as case numbers get skipped
+        check_duplicates = []
         for lhs_sample in lhs_samples:
             dimension_indices = (lhs_sample * dimension_levels).round().astype(int)
             dimension_combination = [config["dimensions"][k][i] for k, i in zip(config["dimensions"].keys(), dimension_indices)]
+            if "".join(map(str, dimension_combination)) in check_duplicates:
+                continue
+            check_duplicates.append("".join(map(str, dimension_combination)))
             building_verticies = populate_verticies(*dimension_combination, building_template)
             if not building_verticies:
                 continue

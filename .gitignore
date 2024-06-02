@@ -1,4 +1,9 @@
 cases/
+testing/
 scratch.ipynb
+pickling.ipynb
 generate_case_dirs.sh
 openfoam_skywalk.tar
+openfoam_skywalk_container.tar
+template_old
+dimension_combinations
