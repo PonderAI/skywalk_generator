@@ -1,10 +1,17 @@
 import os
 from pathlib import Path
 import subprocess
+import tomli
 # import multiprocessing as mp
 
 def main():
-    path = Path("cases")
+
+    with open("config.toml", "rb") as f:
+        config = tomli.load(f)
+
+    case_path = Path(config["case_path"])
+
+    path = Path(case_path)
     cases = os.listdir(path)
     # cpus = os.cpu_count()
 
