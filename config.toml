@@ -1,5 +1,9 @@
 template_path = "./template"
 case_path = "./cases"
+output_path = "./output"
+ux_uy_clim = [-6,6]
+uz_clim = [-2,2]
+
 
 building_template = """
     building_1

@@ -39,6 +39,9 @@ python3 src/3_postprocess_cfd_data.py
 
 ## TODO:
 - Add pyproject.toml file and modify the docker file
+- Modify part 3 to run with config file
+- Modify part 3 to pull only geom slice as 2m slice
+- Create part 4 to preprocess trianing data
 - ~~Remove uneccassary files from the template directory~~
 - ~~Change the grading in the y-direction of the skywalk~~
 - ~~Add CLI arguments for testing and number of cases limit to generate_cases.py~~
