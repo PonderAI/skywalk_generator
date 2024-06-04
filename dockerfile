@@ -45,4 +45,4 @@ ENV VTKI_OFF_SCREEN True
 WORKDIR /skywalk_generator
 
 # Install dependencies
-RUN pip3 install tomli numpy pyvista debugpy pyDOE typer[all]
+RUN pip3 install tomli numpy pyvista scipy debugpy pyDOE typer[all]
