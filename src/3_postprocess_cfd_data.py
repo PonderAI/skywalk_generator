@@ -27,24 +27,24 @@ def save_field(output_path, mesh, field, clim):
 def process_case(case, output_path):
 
     geom_vtp = f"{case}/postProcessing/surfacesVelocity/1000/geom_slice.vtp"
-    flow_vtp = f"{case}/postProcessing/surfacesVelocity/1000/s2.vtp"
+    vfield_vtp = f"{case}/postProcessing/surfacesVelocity/1000/s2.vtp"
     geom_mesh = pv.read(geom_vtp)
-    flow_mesh = pv.read(flow_vtp)
+    vfield_mesh = pv.read(vfield_vtp)
 
     try:
-        u, v, w = (flow_mesh["U"][:,i] for i in range(3))
+        u, v, w = (vfield_mesh["U"][:,i] for i in range(3))
         geom = geom_mesh["U"][:,0]
     except (TypeError, KeyError) as e:
         print(f"Issue with {case} {e}")
         return
 
     clim=config["ux_uy_clim"]
-    save_field(f"{output_path}_Ux", flow_mesh, field=u, clim=clim)
-    save_field(f"{output_path}_Uy", flow_mesh, field=v, clim=clim)
+    save_field(f"{output_path}_Ux", vfield_mesh, field=u, clim=clim)
+    save_field(f"{output_path}_Uy", vfield_mesh, field=v, clim=clim)
     save_field(f"{output_path}_geom", geom_mesh, field=geom, clim=clim)
 
     clim=config["uz_clim"]
-    save_field(f"{output_path}_Uz", flow_mesh, field=w, clim=clim)
+    save_field(f"{output_path}_Uz", vfield_mesh, field=w, clim=clim)
 
     im_Ux = Image.open(f'{output_path}_Ux.png', 'r')
     im_Uy = Image.open(f'{output_path}_Uy.png', 'r')

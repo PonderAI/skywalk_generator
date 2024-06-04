@@ -3,6 +3,8 @@ case_path = "./cases"
 output_path = "./output"
 ux_uy_clim = [-6,6]
 uz_clim = [-2,2]
+geom_clim = 100
+cnr_mask = "./corner_mask.npy"
 
 
 building_template = """

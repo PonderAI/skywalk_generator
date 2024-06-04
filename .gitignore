@@ -1,5 +1,6 @@
 cases/
 testing/
+output/
 scratch.ipynb
 pickling.ipynb
 generate_case_dirs.sh
